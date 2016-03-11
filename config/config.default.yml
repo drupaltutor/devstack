@@ -6,7 +6,7 @@ config:
   network: 
     type: shared_folders
     # ip: 172.28.128.150
-    # type: nfs
+    # share_type: nfs
   sites:
     dir: /home/vagrant/sites
     host_dir: ../sites/

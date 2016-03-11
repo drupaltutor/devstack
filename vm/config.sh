@@ -19,16 +19,12 @@ function parse_yaml {
 }
 
 function get_var {
-    DIR="${BASH_SOURCE%/*}"
-
-    if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
-    
-    if [ -f $DIR/config/config.default.yml ]; then
-        eval $(parse_yaml $DIR/config/config.default.yml "CONF_DEFAULT_")
+    if [ -f /vagrant-config/config.default.yml ]; then
+        eval $(parse_yaml /vagrant-config/config.default.yml "CONF_DEFAULT_")
     fi
 
-    if [ -f $DIR/config/config.yml ]; then
-        eval $(parse_yaml $DIR/config/config.yml "CONF_")
+    if [ -f /vagrant-config/config.yml ]; then
+        eval $(parse_yaml /vagrant-config/config.yml "CONF_")
     fi
 
     local VAR=`echo CONF_$1`;

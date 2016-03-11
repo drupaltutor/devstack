@@ -4,4 +4,3 @@ sites/*
 data/*
 !data/.gitkeep
 config/config.yml
-vm/config

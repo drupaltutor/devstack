@@ -6,9 +6,9 @@ $app = new Silex\Application();
 
 // Load configuration
 $yaml = new \Symfony\Component\Yaml\Parser();
-$config = $yaml->parse(file_get_contents(__DIR__.'/../../config/config.default.yml'));
-if (file_exists(__DIR__.'/../../config/config.yml')) {
-  $local_config = $yaml->parse(file_get_contents(__DIR__.'/../../config/config.yml'));
+$config = $yaml->parse(file_get_contents('/vagrant-config/config.default.yml'));
+if (file_exists('/vagrant-config/config.yml')) {
+  $local_config = $yaml->parse(file_get_contents('/vagrant-config/config.yml'));
   $config['config'] = array_merge($config['config'], $local_config['config']);
 }
 $app['config'] = $config['config'];
