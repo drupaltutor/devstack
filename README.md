@@ -1,7 +1,6 @@
 # BitWisdom PHP Development Environment 
 
 ## Installing
-
 1. [Install VirtualBox](https://www.virtualbox.org/). 
 2. [Install Vagrant](https://www.vagrantup.com/).
 3. Install the [vagrant-triggers extension](https://github.com/emyl/vagrant-triggers).
@@ -12,7 +11,6 @@ into the ```vm``` subdirectory. For example: ```cd ~/Desktop/phpdev/vm```
 6. Run ```vagrant up``` to import and start the virtual machine.
 
 ## Using the Development Environment
-
 Once you start the virtual machine, you can access your development server at:
 [http://localhost:8888/](http://localhost:8888/). This will display the server
 dashboard, with links to your sites and tools.
@@ -22,6 +20,12 @@ You will then be able to find them listed under **Your Sites** on the server das
 
 You can log into the virtual machine by SSH by running ```vagrant ssh```. This virtual 
 machine has composer, Drush, and Drupal Console pre-installed.
+
+## Automated Backups
+This environment has been designed to automatically backup the MySQL database on every
+```vagrant halt``` and ```vagrant destroy``` command. It will re-import the database 
+from the backup every time you run ```vagrant up```. The database backup file is stored
+in the ```data``` directory.
 
 ## Overriding the Configuration
 The default configuration can be found in ```/config/config.default.yml```. 
