@@ -28,6 +28,6 @@ from the backup every time you run ```vagrant up```. The database backup file is
 in the ```data``` directory.
 
 ## Overriding the Configuration
-The default configuration can be found in ```/config/config.default.yml```. 
+The default configuration can be found in ```config/config.default.yml```. 
 You can override any parameters in the default configuration by creating
-a file ```/config/config.yml```. The format should be the same as ```config.default.yml```.
+a file ```config/config.yml```. The format should be the same as ```config.default.yml```.
