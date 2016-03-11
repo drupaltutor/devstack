@@ -1,0 +1,7 @@
+.vagrant
+sites/*
+!sites/.gitkeep
+data/*
+!data/.gitkeep
+config/config.yml
+vm/config

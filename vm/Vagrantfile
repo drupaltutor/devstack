@@ -1,0 +1,52 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+require 'yaml'
+
+current_dir    = File.dirname(File.expand_path(__FILE__))
+config_default = YAML.load_file("#{current_dir}/../config/config.default.yml")
+conf = config_default['config']
+if File.exist?("#{current_dir}/../config/config.yml")
+  config_local = YAML.load_file("#{current_dir}/../config/config.yml")
+  conf = conf.merge(config_local['config'])
+end
+
+Vagrant.configure(2) do |config|
+  
+  # Box Settings
+  config.vm.box = conf['box']
+  config.vm.provider "virtualbox" do |v|
+    v.memory = conf['virtualbox']['memory']
+    v.cpus = conf['virtualbox']['cpus'] 
+    v.customize ["modifyvm", :id, "--ioapic", "on"]
+  end
+  
+  # Network
+  if conf['network']['type'] == 'private_network'
+    if (conf['network'].has_key? 'ip')
+      config.vm.network :private_network, ip: conf['network']['ip']
+    else
+      config.vm.network "private_network", type: "dhcp"
+    end
+    config.vm.synced_folder "../data/", "/home/vagrant/data", type: conf['network']['type'], mount_options: ['actimeo=1'], create: true
+    config.vm.synced_folder "../config/", "/vagrant/config", type: conf['network']['type'], mount_options: ['actimeo=1'], create: true
+    config.vm.synced_folder conf['sites']['host_dir'], conf['sites']['dir'], conf['network']['type'], mount_options: ['actimeo=1'], create: true
+  else
+    config.vm.synced_folder "../data/", "/home/vagrant/data", create: true
+    config.vm.synced_folder "../config/", "/vagrant/config", create: true
+    config.vm.synced_folder conf['sites']['host_dir'], conf['sites']['dir'], owner: "www-data", group: "www-data", mount_options: ["dmode=775,fmode=664"], create: true
+    config.vm.network :forwarded_port, host: conf['apache']['port'], guest: 80
+    config.vm.network :forwarded_port, host: conf['mailhog']['port'], guest: 8025
+  end
+    
+  config.trigger.before [:halt, :destroy] do
+    info "Backing up the database before shutting down the VM..."
+    run_remote  "bash /vagrant/bin/db_backup.sh"
+  end
+
+  config.trigger.after :up do
+    info "Importing database backup..."
+    run_remote  "bash /vagrant/bin/db_restore.sh"
+  end
+ 
+end

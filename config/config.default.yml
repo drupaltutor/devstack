@@ -1,0 +1,18 @@
+config:
+  box: bitwisdom/phpdev64 
+  virtualbox: 
+    memory: 512
+    cpus: 1
+  network: 
+    type: shared_folders
+    # ip: 172.28.128.150
+    # type: nfs
+  sites:
+    dir: /home/vagrant/sites
+    host_dir: ../sites/
+  apache: 
+    port: 8888
+  mysql:
+    password: root
+  mailhog:
+    port: 8025

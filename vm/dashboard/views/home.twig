@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BitWisdom Development Stack</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+</head>
+<body>
+<div class="jumbotron">
+    <div class="container">
+        <h1>BitWisdom Development Stack</h1>
+    </div>
+</div>
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Your Sites</h3>
+                </div>
+                <ul class="list-group">
+                    {% for site in sites %}
+                        <li class="list-group-item"><a href="/sites/{{ site }}" target="_blank">{{ site }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Development Tools</h3>
+                </div>
+                <ul class="list-group">
+                    {% for tool in tools %}
+                        <li class="list-group-item">
+                            <a href="{{ tool.url }}" target="_blank">{{ tool.name }}</a>
+                            {% if tool.description %}
+                                <br />{{ tool.description }}
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+</div>
+</body>
+<footer>
+    <div class="container">
+        <p>© 2016 Bitwisdom, LLC.</p>
+    </div>
+</footer>
+</html>
