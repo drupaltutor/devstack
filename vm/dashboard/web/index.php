@@ -33,17 +33,29 @@ $app['tools'] = [
   ],
   [
     'name' => 'PHP Information',
-    'url' => $app['home_url'] . '/phpinfo',
+    'url' => $app['home_url'] . '/dashboard/phpinfo',
   ]
 ];
 
 // Load list of user sites.
 $sites = [];
-if (!empty($app['config']['sites']['dir']) && file_exists($app['config']['sites']['dir'])) {
-  $sites = array_filter(glob($app['config']['sites']['dir'] . '/*'), 'is_dir');
+
+if (!empty($app['config']['sites']['single_app'])) {
+  $sites[] = [
+    'path' => '/',
+    'name' => !empty($app['config']['sites']['app_name']) ? $app['config']['sites']['single_app'] : 'PHP Application',
+  ];
 }
-foreach ($sites as $i => $site) {
-  $sites[$i] = basename($site);
+else {
+  if (!empty($app['config']['sites']['dir']) && file_exists($app['config']['sites']['dir'])) {
+    $sites = array_filter(glob($app['config']['sites']['dir'] . '/*'), 'is_dir');
+  }
+  foreach ($sites as $i => $site) {
+    $sites[$i] = [
+      'path' => '/' . basename($site),
+      'name' => basename($site),
+    ];
+  }
 }
 $app['sites'] = $sites;
 

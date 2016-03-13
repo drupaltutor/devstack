@@ -22,7 +22,7 @@
                 </div>
                 <ul class="list-group">
                     {% for site in sites %}
-                        <li class="list-group-item"><a href="/sites/{{ site }}" target="_blank">{{ site }}</a></li>
+                        <li class="list-group-item"><a href="{{ site.path }}" target="_blank">{{ site.name }}</a></li>
                     {% endfor %}
                 </ul>
             </div>
