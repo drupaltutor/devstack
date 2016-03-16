@@ -1,6 +1,6 @@
-.vagrant
+vm/.vagrant
 sites/*
-!sites/.gitkeep
+!sites/index.php
 data/*
 !data/.gitkeep
 config/config.yml

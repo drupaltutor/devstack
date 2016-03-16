@@ -10,6 +10,8 @@ config:
   sites:
     dir: /home/vagrant/sites
     host_dir: ../sites/
+    single_app: false
+    app_name: PHP Application
   apache: 
     port: 8888
   mysql:
