@@ -6,8 +6,8 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
 MYSQL_PASSWORD=$(get_var config_mysql_password)
 
-if [ -f /var/data/db_backup.sql.gz ]; then
-    gunzip -k /var/data/db_backup.sql
-    mysql -u root --password=$MYSQL_PASSWORD < /var/data/db_backup.sql
-    rm -f /var/data/db_backup.sql
+if [ -f /home/vagrant/data/db_backup.sql.gz ]; then
+    gunzip -k /home/vagrant/data/db_backup.sql
+    mysql -u root --password=$MYSQL_PASSWORD < /home/vagrant/data/db_backup.sql
+    rm -f /home/vagrant/data/db_backup.sql
 fi
