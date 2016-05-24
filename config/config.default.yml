@@ -1,5 +1,5 @@
 config:
-  box: bitwisdom/phpdev64
+  box: bitwisdom/phpdev64 
   virtualbox: 
     memory: 512
     cpus: 1
@@ -8,7 +8,7 @@ config:
     # ip: 172.28.128.150
     # share_type: nfs
   sites:
-    dir: /home/ubuntu/sites
+    dir: /home/vagrant/sites
     host_dir: ../sites/
     single_app: false
     app_name: PHP Application

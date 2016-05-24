@@ -29,5 +29,5 @@ fi
 # Git Configuration
 GIT_EMAIL=$1
 GIT_NAME=$2
-su - ubuntu -c "git config --global user.email '$GIT_EMAIL'"
-su - ubuntu -c "git config --global user.name '$GIT_NAME'"
+su - vagrant -c "git config --global user.email '$GIT_EMAIL'"
+su - vagrant -c "git config --global user.name '$GIT_NAME'"
