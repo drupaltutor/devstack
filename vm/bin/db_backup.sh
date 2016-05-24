@@ -6,7 +6,7 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
 MYSQL_PASSWORD=$(get_var config_mysql_password)
 
-mysqldump -u root --password=$MYSQL_PASSWORD --add-drop-database --flush-privileges --routines --all-databases > /home/vagrant/data/db_backup.sql
+mysqldump -u root --password=$MYSQL_PASSWORD --add-drop-database --flush-privileges --all-databases > /home/vagrant/data/db_backup.sql
 
 if [ -f /home/vagrant/data/db_backup.sql.gz ]; then
     rm -f /home/vagrant/data/db_backup.sql.gz
