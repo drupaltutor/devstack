@@ -5,7 +5,6 @@ config:
     cpus: 1
   network: 
     type: shared_folders
-    # type: private_network
     # ip: 172.28.128.150
     # share_type: nfs
   sites:
