@@ -43,7 +43,7 @@ $sites = [];
 if (!empty($app['config']['sites']['single_app'])) {
   $sites[] = [
     'path' => '/',
-    'name' => !empty($app['config']['sites']['app_name']) ? $app['config']['sites']['single_app'] : 'PHP Application',
+    'name' => !empty($app['config']['sites']['app_name']) ? $app['config']['sites']['app_name'] : 'PHP Application',
   ];
 }
 else {
