@@ -31,13 +31,20 @@ Vagrant.configure(2) do |config|
     else
       config.vm.network "private_network", type: "dhcp"
     end
-    config.vm.synced_folder "../data/", "/home/vagrant/data", type: conf['network']['share_type'], mount_options: ['actimeo=1'], create: true
     config.vm.synced_folder "../config/", "/vagrant-config", type: conf['network']['share_type'], mount_options: ['actimeo=1'], create: true
-    config.vm.synced_folder conf['sites']['host_dir'], conf['sites']['dir'], type: conf['network']['share_type'], mount_options: ['actimeo=1'], create: true
+    if (conf['network']['share_type'] == 'nfs' && Vagrant.has_plugin?("vagrant-bindfs"))
+        config.vm.synced_folder "../data/", "/vagrant-data", type: conf['network']['share_type'], mount_options: ['actimeo=1'], create: true
+        config.vm.synced_folder conf['sites']['host_dir'], "/vagrant-sites", type: conf['network']['share_type'], mount_options: ['actimeo=1'], create: true
+        config.bindfs.bind_folder "/vagrant-data", "/home/vagrant/data"
+        config.bindfs.bind_folder "/vagrant-sites", conf['sites']['dir']
+    else
+        config.vm.synced_folder "../data/", "/home/vagrant/data", type: conf['network']['share_type'], mount_options: ['actimeo=1'], create: true
+        config.vm.synced_folder conf['sites']['host_dir'], conf['sites']['dir'], type: conf['network']['share_type'], mount_options: ['actimeo=1'], create: true
+    end
   else
     config.vm.synced_folder "../data/", "/home/vagrant/data", create: true
     config.vm.synced_folder "../config/", "/vagrant-config", create: true
-    config.vm.synced_folder conf['sites']['host_dir'], conf['sites']['dir'], owner: "www-data", group: "www-data", mount_options: ["dmode=775,fmode=664"], create: true
+    config.vm.synced_folder conf['sites']['host_dir'], conf['sites']['dir'], owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=664"], create: true
     config.vm.network :forwarded_port, host: conf['apache']['port'], guest: 80
     config.vm.network :forwarded_port, host: conf['mailhog']['port'], guest: 8025
   end
