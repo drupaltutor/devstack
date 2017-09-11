@@ -19,11 +19,11 @@ fi
 
 # PHP Custom
 if [ -f /vagrant-config/php/apache2/custom.ini ]; then
-  ln -sv /vagrant-config/php/apache2/custom.ini /etc/php/7.0/apache2/conf.d/99-user.ini
+  ln -sv /vagrant-config/php/apache2/custom.ini /etc/php/7.1/apache2/conf.d/99-user.ini
   /usr/sbin/apache2ctl restart
 fi
 if [ -f /vagrant-config/php/cli/custom.ini ]; then
-  ln -sv /vagrant-config/php/cli/custom.ini /etc/php/7.0/cli/conf.d/99-user.ini
+  ln -sv /vagrant-config/php/cli/custom.ini /etc/php/7.1/cli/conf.d/99-user.ini
 fi
 
 # Git Configuration
