@@ -1,7 +1,7 @@
 config:
   box: bitwisdom/phpdev64
   virtualbox: 
-    memory: 512
+    memory: 1024 
     cpus: 1
   network: 
     type: shared_folders
