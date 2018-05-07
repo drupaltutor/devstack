@@ -53,15 +53,15 @@ Vagrant.configure(2) do |config|
  
   config.vm.provision :shell, path: "provision.sh", args: [ conf['git']['email'], conf['git']['name'] ]
     
-  config.trigger.before [:halt, :destroy] do
-    info "Backing up the database before shutting down the VM..."
-    run_remote  "bash /vagrant/bin/db_backup.sh"
+  config.trigger.before :halt, :destroy do |trigger|
+    trigger.info = "Backing up the database before shutting down the VM..."
+    trigger.run_remote = {inline: "bash /vagrant/bin/db_backup.sh"}
   end
 
-  config.trigger.after :up do
-    info "Importing database backup..."
-    run_remote  "bash /vagrant/bin/db_restore.sh"
-    run_remote  "apache2ctl start"
+  config.trigger.after :up do |trigger|
+    trigger.info = "Importing database backup..."
+    trigger.run_remote = {inline:"bash /vagrant/bin/db_restore.sh"}
+    trigger.run_remote = {inline:"apache2ctl start"}
   end
  
 end
