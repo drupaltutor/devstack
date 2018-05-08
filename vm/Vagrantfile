@@ -60,8 +60,7 @@ Vagrant.configure(2) do |config|
 
   config.trigger.after :up do |trigger|
     trigger.info = "Importing database backup..."
-    trigger.run_remote = {inline:"bash /vagrant/bin/db_restore.sh"}
-    trigger.run_remote = {inline:"apache2ctl start"}
+    trigger.run_remote = {inline:"bash /vagrant/bin/db_restore.sh;apache2ctl start"}
   end
  
 end
