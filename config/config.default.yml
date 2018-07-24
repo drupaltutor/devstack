@@ -11,6 +11,7 @@ config:
   sites:
     dir: /home/vagrant/sites
     host_dir: ../sites/
+    doc_root: /home/vagrant/sites
     single_app: false
     app_name: PHP Application
   apache: 
