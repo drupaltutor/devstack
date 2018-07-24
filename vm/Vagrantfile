@@ -11,9 +11,9 @@ if File.exist?("#{current_dir}/../config/config.yml")
   conf = conf.merge(config_local['config'])
 end
 
-$set_environment_variables = <<SCRIPT
-tee "/etc/profile.d/myvars.sh" > "/dev/null" <<EOF
-export APACHE_DOCROOT=#{conf['sites']['doc_root']}
+$set_apache_variables = <<SCRIPT
+tee "/etc/apache2/bitwisdom.conf" > "/dev/null" <<EOF
+Define BITWISDOM_DOC_ROOT #{conf['sites']['doc_root']}
 EOF
 SCRIPT
 
@@ -57,7 +57,7 @@ Vagrant.configure(2) do |config|
     config.vm.network :forwarded_port, host: conf['mailhog']['port'], guest: 8025
   end
 
-  config.vm.provision "shell", inline: $set_environment_variables, run: "always"
+  config.vm.provision "shell", inline: $set_apache_variables, run: "always"
  
   config.vm.provision :shell, path: "provision.sh", args: [ conf['git']['email'], conf['git']['name'] ]
     
