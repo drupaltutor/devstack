@@ -1,4 +1,5 @@
 config:
+  hostname: bitwisdom
   box: bitwisdom/phpdev64
   virtualbox: 
     memory: 1024 

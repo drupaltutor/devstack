@@ -17,6 +17,10 @@ Define BITWISDOM_DOC_ROOT #{conf['sites']['doc_root']}
 EOF
 SCRIPT
 
+$set_hostname = <<SCRIPT
+hostname #{conf['hostname']}
+SCRIPT
+
 Vagrant.configure(2) do |config|
 
   # SSH Forwarding
@@ -29,6 +33,9 @@ Vagrant.configure(2) do |config|
     v.cpus = conf['virtualbox']['cpus'] 
     v.customize ["modifyvm", :id, "--ioapic", "on"]
   end
+
+  # Hostname
+  config.vm.provision "shell", inline: $set_hostname, run: "always"
 
   # Network
   if conf['network']['type'] == 'private_network'
