@@ -1,5 +1,5 @@
-TwigServiceProvider
-===================
+Twig
+====
 
 The *TwigServiceProvider* provides integration with the `Twig
 <http://twig.sensiolabs.org/>`_ template engine.
@@ -115,10 +115,18 @@ from a template:
     {# or if you are also using the UrlGeneratorServiceProvider #}
     {{ render(url('sidebar')) }}
 
+    {# or you can reference a controller directly without defining a route for it #}
+    {{ render(controller(controller)) }}
+
 .. note::
 
     You must prepend the ``app.request.baseUrl`` to render calls to ensure
     that the render works when deployed into a sub-directory of the docroot.
+
+.. note::
+
+    Read the Twig `reference`_ for Symfony document to learn more about the
+    various Twig functions.
 
 Traits
 ------
@@ -144,6 +152,12 @@ Traits
 
     return $app->render('index.html', ['name' => 'Fabien'], new StreamedResponse());
 
+* **renderView**: Renders a view with the given parameters and returns a string.
+
+.. code-block:: php
+
+    $content = $app->renderView('index.html', ['name' => 'Fabien']);
+
 Customization
 -------------
 
@@ -159,3 +173,5 @@ You can configure the Twig environment before using it by extending the
 
 For more information, check out the `official Twig documentation
 <http://twig.sensiolabs.org>`_.
+
+.. _reference: https://symfony.com/doc/current/reference/twig_reference.html#controller

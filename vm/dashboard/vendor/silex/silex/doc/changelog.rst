@@ -1,6 +1,14 @@
 Changelog
 =========
 
+1.3.6 (2016-04-30)
+------------------
+
+**WARNING** This is the last release of the Silex 1.x branch. Please, upgrade
+to Silex 2.x.
+
+* minor docs/tests changes
+
 1.3.5 (2016-01-06)
 ------------------
 

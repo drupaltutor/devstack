@@ -1,5 +1,5 @@
-SerializerServiceProvider
-===========================
+Serializer
+==========
 
 The *SerializerServiceProvider* provides a service for serializing objects.
 
@@ -45,9 +45,7 @@ Registering
 Usage
 -----
 
-The ``SerializerServiceProvider`` provider provides a ``serializer`` service:
-
-.. code-block:: php
+The ``SerializerServiceProvider`` provider provides a ``serializer`` service::
 
     use Silex\Application;
     use Silex\Provider\SerializerServiceProvider;
@@ -73,4 +71,3 @@ The ``SerializerServiceProvider`` provider provides a ``serializer`` service:
         ));
     })->assert("_format", "xml|json")
       ->assert("id", "\d+");
-

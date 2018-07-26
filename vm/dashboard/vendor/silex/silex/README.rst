@@ -1,10 +1,10 @@
 Silex, a simple Web Framework
 =============================
 
-Silex is a PHP micro-framework to develop websites based on `Symfony
-components`_:
+**WARNING** Silex 1.x is not maintained anymore. Please, upgrade to Silex 2.x.
 
-.. code-block:: php
+Silex is a PHP micro-framework to develop websites based on `Symfony
+components`_::
 
     <?php
 
