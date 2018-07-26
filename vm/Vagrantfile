@@ -29,7 +29,7 @@ Vagrant.configure(2) do |config|
     v.cpus = conf['virtualbox']['cpus'] 
     v.customize ["modifyvm", :id, "--ioapic", "on"]
   end
-  
+
   # Network
   if conf['network']['type'] == 'private_network'
     if (conf['network'].has_key? 'ip')
@@ -68,7 +68,7 @@ Vagrant.configure(2) do |config|
 
   config.trigger.after :up do |trigger|
     trigger.info = "Importing database backup..."
-    trigger.run_remote = {inline:"bash /vagrant/bin/db_restore.sh;apache2ctl start"}
+    trigger.run_remote = {inline:"bash /vagrant/bin/db_restore.sh;apache2ctl restart"}
   end
  
 end
