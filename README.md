@@ -18,7 +18,7 @@ You should put your development sites and applications in the ```sites``` folder
 You will then be able to find them listed under **Your Sites** on the server dashboard.
 
 You can log into the virtual machine by SSH by running ```vagrant ssh```. This virtual 
-machine has composer, Drush, and Drupal Console pre-installed.
+machine has composer and Drush pre-installed.
 
 ## Automated Backups
 This environment has been designed to automatically backup the MySQL database on every
