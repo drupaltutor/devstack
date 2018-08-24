@@ -17,6 +17,10 @@ Define BITWISDOM_DOC_ROOT #{conf['sites']['doc_root']}
 EOF
 SCRIPT
 
+$set_hostname = <<SCRIPT
+hostname #{conf['hostname']}
+SCRIPT
+
 Vagrant.configure(2) do |config|
 
   # SSH Forwarding
@@ -28,8 +32,12 @@ Vagrant.configure(2) do |config|
     v.memory = conf['virtualbox']['memory']
     v.cpus = conf['virtualbox']['cpus'] 
     v.customize ["modifyvm", :id, "--ioapic", "on"]
+    v.customize [ 'modifyvm', :id, '--uartmode1', 'disconnected']
   end
-  
+
+  # Hostname
+  config.vm.provision "shell", inline: $set_hostname, run: "always"
+
   # Network
   if conf['network']['type'] == 'private_network'
     if (conf['network'].has_key? 'ip')
@@ -68,7 +76,7 @@ Vagrant.configure(2) do |config|
 
   config.trigger.after :up do |trigger|
     trigger.info = "Importing database backup..."
-    trigger.run_remote = {inline:"bash /vagrant/bin/db_restore.sh;apache2ctl start"}
+    trigger.run_remote = {inline:"bash /vagrant/bin/db_restore.sh;apache2ctl restart"}
   end
  
 end

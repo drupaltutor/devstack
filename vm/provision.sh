@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-DIR="${BASH_SOURCE%/*}"
-if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
-. "$DIR/config.sh"
+. "/vagrant/config.sh"
 
 # Apache Sites
 if [ -d /vagrant-config/apache2/sites-enabled ]; then
