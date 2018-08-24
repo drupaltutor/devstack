@@ -28,6 +28,7 @@ Vagrant.configure(2) do |config|
 
   # Box Settings
   config.vm.box = conf['box']
+  config.vm.box_version = conf['box_version']
   config.vm.provider "virtualbox" do |v|
     v.memory = conf['virtualbox']['memory']
     v.cpus = conf['virtualbox']['cpus'] 
@@ -68,15 +69,24 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", inline: $set_apache_variables, run: "always"
  
   config.vm.provision :shell, path: "provision.sh", args: [ conf['git']['email'], conf['git']['name'] ]
-    
-  config.trigger.before :halt, :destroy do |trigger|
-    trigger.info = "Backing up the database before shutting down the VM..."
-    trigger.run_remote = {inline: "bash /vagrant/bin/db_backup.sh"}
+
+  if conf['mysql']['backup']
+    config.trigger.before :halt, :destroy do |trigger|
+      trigger.info = "Backing up the database before shutting down the VM..."
+      trigger.run_remote = {inline: "bash /vagrant/bin/db_backup.sh"}
+    end
+  end
+
+  if conf['mysql']['restore']
+    config.trigger.after :up do |trigger|
+      trigger.info = "Importing database backup..."
+      trigger.run_remote = {inline:"bash /vagrant/bin/db_restore.sh"}
+    end
   end
 
   config.trigger.after :up do |trigger|
-    trigger.info = "Importing database backup..."
-    trigger.run_remote = {inline:"bash /vagrant/bin/db_restore.sh;apache2ctl restart"}
+    trigger.info = "Starting web server..."
+    trigger.run_remote = {inline:"apache2ctl start"}
   end
  
 end

@@ -1,8 +1,9 @@
 config:
   hostname: bitwisdom
   box: bitwisdom/phpdev64
+  box_version: 2.0.2
   virtualbox: 
-    memory: 1024 
+    memory: 1536
     cpus: 2 
   network: 
     type: shared_folders
@@ -19,6 +20,8 @@ config:
     port: 8888
   mysql:
     password: root
+    backup: true
+    restore: true
   mailhog:
     port: 8025
   git:
