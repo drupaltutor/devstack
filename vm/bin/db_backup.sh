@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-DIR="${BASH_SOURCE%/*}"
-if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
-. "$DIR/../config.sh"
+. "/vagrant/config.sh"
 
 MYSQL_PASSWORD=$(get_var config_mysql_password)
 
