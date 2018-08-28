@@ -13,6 +13,11 @@ if (file_exists('/vagrant-config/config.yml')) {
 }
 $app['config'] = $config['config'];
 
+$app['version'] = 'Unknown';
+if (file_exists('/vagrant-config/VERSION')) {
+  $app['version'] = trim(file_get_contents('/vagrant-config/VERSION'));
+}
+
 // Load Dev Tools
 $app['home_url'] = 'http://' . $_SERVER['HTTP_HOST'];
 $app['home_url_without_port'] = 'http://' . $_SERVER['SERVER_NAME'];
@@ -71,6 +76,7 @@ $app->get('/', function () use ($app) {
     'sites' => $app['sites'],
     'tools' => $app['tools'],
     'config' => $app['config'],
+    'version' => $app['version'],
   ]);
 });
 
