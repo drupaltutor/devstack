@@ -1,12 +1,12 @@
-# BitWisdom PHP Development Environment 
+# DrupalTutor Development Environment
 
 ## Installing
 1. [Install VirtualBox](https://www.virtualbox.org/). 
 2. [Install Vagrant](https://www.vagrantup.com/).
-3. [Download this repository](https://github.com/bitwisdom/phpdev/archive/master.zip), 
+3. [Download this repository](https://github.com/drupaltutor/devstack/archive/master.zip),
 and unpack it on your computer.
 4. From the command line, change directory to the folder you unpacked the files into, 
-into the ```vm``` subdirectory. For example: ```cd ~/Desktop/phpdev/vm```
+into the ```vm``` subdirectory. For example: ```cd ~/Desktop/devstack/vm```
 5. Run ```vagrant up``` to import and start the virtual machine.
 
 ## Using the Development Environment

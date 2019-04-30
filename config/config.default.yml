@@ -1,5 +1,5 @@
 config:
-  hostname: bitwisdom
+  hostname: drupaltutor-devstack
   box: bitwisdom/phpdev64
   box_version: 2.1.0
   virtualbox: 
@@ -25,5 +25,5 @@ config:
   mailhog:
     port: 8025
   git:
-    email: example@example.com
-    name: Example
+    email: drupaltutor-student@example.com
+    name: DrupalTutor Student
