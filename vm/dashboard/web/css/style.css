@@ -1,0 +1,10 @@
+h1 {
+  font-size: 3em;
+}
+.row > div {
+  margin-bottom: 2em;
+}
+footer {
+  margin-top: 2em;
+  font-size: 80%;
+}
