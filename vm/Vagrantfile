@@ -3,9 +3,19 @@
 
 require 'yaml'
 current_dir    = File.dirname(File.expand_path(__FILE__))
+home_dir = Dir.home
 
+# Default config
 config_default = YAML.load_file("#{current_dir}/../config/config.default.yml")
 conf = config_default['config']
+
+# Global config
+if File.exist?("#{home_dir}/.drupaltutor/config.global.yml")
+  config_global = YAML.load_file("#{home_dir}/.drupaltutor/config.global.yml")
+  conf = conf.merge(config_global['config'])
+end
+
+# Local config
 if File.exist?("#{current_dir}/../config/config.yml")
   config_local = YAML.load_file("#{current_dir}/../config/config.yml")
   conf = conf.merge(config_local['config'])
@@ -88,5 +98,5 @@ Vagrant.configure(2) do |config|
     trigger.info = "Starting web server..."
     trigger.run_remote = {inline:"apache2ctl restart"}
   end
- 
+
 end

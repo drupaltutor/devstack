@@ -30,3 +30,9 @@ in the ```data``` directory.
 The default configuration can be found in ```config/config.default.yml```. 
 You can override any parameters in the default configuration by creating
 a file ```config/config.yml```. The format should be the same as ```config.default.yml```.
+
+You can also override settings globally by using a file in your home directory: 
+``~/.drupaltutor/config.global.yml``. This is useful for setting the git name and email
+address, which you likely share across multiple projects. The local ``config.yml``
+file will override the global file, however, so be sure to remove the the git configuration
+from that file if you want the global settings to be active.
