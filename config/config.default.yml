@@ -1,9 +1,9 @@
 config:
   hostname: drupaltutor-devstack
   box: bitwisdom/phpdev64
-  box_version: 2.2.0
+  box_version: 2.2.1
   virtualbox: 
-    memory: 1536
+    memory: 2048
     cpus: 2 
   network: 
     type: shared_folders
